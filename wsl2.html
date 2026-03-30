@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WSL2 2025/26 — League Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0b0d11;
+    --surface:   #13161d;
+    --border:    #1f2430;
+    --muted:     #3a3f52;
+    --text:      #e8eaf2;
+    --sub:       #7a80a0;
+    --accent:    #c8ff5a;
+    --promo:     #5af0b0;
+    --playoff:   #5ab4f0;
+    --relegate:  #f05a7a;
+    --gold:      #ffd966;
+    --r1: 1; --r2: 2; --r3: 3;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: relative;
+    padding: 48px 40px 36px;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 80% -10%, rgba(200,255,90,.08) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 110%, rgba(90,176,240,.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--accent); background: rgba(200,255,90,.08); border: 1px solid rgba(200,255,90,.2);
+    padding: 4px 10px; border-radius: 4px; margin-bottom: 12px;
+  }
+  .badge::before { content: '●'; font-size: 8px; animation: blink 2s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+  h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px,6vw,64px); letter-spacing: .04em; line-height: 1; }
+  h1 span { color: var(--accent); }
+  .meta { font-size: 12px; color: var(--sub); font-family: 'DM Mono', monospace; }
+  .games-left {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 20px; text-align: right;
+  }
+  .games-left .num { font-family: 'Bebas Neue', sans-serif; font-size: 40px; color: var(--accent); line-height: 1; }
+  .games-left .lbl { font-size: 11px; color: var(--sub); text-transform: uppercase; letter-spacing: .1em; }
+
+  /* ── TABS ── */
+  .tabs-wrap { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+  .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-top: 32px; }
+  .tab {
+    font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+    padding: 12px 20px; cursor: pointer; color: var(--sub); border-bottom: 2px solid transparent;
+    margin-bottom: -1px; transition: color .2s, border-color .2s; user-select: none; background: none; border-top: none; border-left: none; border-right: none;
+  }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab:hover:not(.active) { color: var(--text); }
+
+  /* ── MAIN ── */
+  main { max-width: 1100px; margin: 0 auto; padding: 32px 40px 64px; }
+  .panel { display: none; animation: fadeUp .35s ease both; }
+  .panel.active { display: block; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+  /* ── LEGEND ── */
+  .legend { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; }
+  .leg { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--sub); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── TABLE ── */
+  .tbl-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; white-space: nowrap; }
+  thead th {
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--sub); padding: 12px 14px; text-align: right; background: var(--surface);
+    border-bottom: 1px solid var(--border); font-weight: 400;
+  }
+  thead th:first-child, thead th:nth-child(2), thead th:nth-child(3) { text-align: left; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background .15s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: rgba(255,255,255,.025); }
+  td { padding: 11px 14px; text-align: right; }
+  td:first-child { text-align: left; }
+  td:nth-child(2) { text-align: left; }
+  td:nth-child(3) { text-align: left; }
+  .rank { font-family: 'DM Mono', monospace; color: var(--sub); font-size: 13px; width: 32px; }
+  .team-name { font-weight: 500; font-size: 14px; }
+  .pts { font-family: 'DM Mono', monospace; font-weight: 600; font-size: 15px; color: var(--text); }
+  .gd-pos { color: var(--promo); }
+  .gd-neg { color: var(--relegate); }
+  .num-cell { font-family: 'DM Mono', monospace; color: var(--sub); font-size: 13px; }
+
+  /* zone row markers */
+  .zone-promo  td:first-child { border-left: 3px solid var(--promo); }
+  .zone-playoff td:first-child { border-left: 3px solid var(--playoff); }
+  .zone-relegate td:first-child { border-left: 3px solid var(--relegate); }
+
+  /* form pills */
+  .form { display: flex; gap: 3px; justify-content: flex-end; }
+  .form span {
+    width: 20px; height: 20px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500;
+  }
+  .form .W { background: rgba(90,240,176,.15); color: var(--promo); }
+  .form .D { background: rgba(90,180,240,.12); color: var(--playoff); }
+  .form .L { background: rgba(240,90,122,.12); color: var(--relegate); }
+
+  /* ── PREDICTIONS ── */
+  .spotlight { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 36px; }
+  .spot-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    padding: 22px 24px; position: relative; overflow: hidden;
+  }
+  .spot-card::before {
+    content: ''; position: absolute; inset: 0; opacity: .06;
+    background: radial-gradient(ellipse at 100% 0%, var(--card-accent) 0%, transparent 60%);
+  }
+  .spot-card.title  { --card-accent: var(--gold); }
+  .spot-card.playoff { --card-accent: var(--playoff); }
+  .spot-card.danger  { --card-accent: var(--relegate); }
+  .spot-label {
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--sub); margin-bottom: 8px;
+  }
+  .spot-team { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: .04em; color: var(--text); line-height: 1.1; }
+  .spot-prob {
+    margin-top: 10px; font-family: 'DM Mono', monospace; font-size: 26px; font-weight: 500;
+  }
+  .spot-card.title .spot-prob { color: var(--gold); }
+  .spot-card.playoff .spot-prob { color: var(--playoff); }
+  .spot-card.danger .spot-prob { color: var(--relegate); }
+  .spot-pts { font-size: 12px; color: var(--sub); margin-top: 4px; }
+
+  /* pred table */
+  .pred-tbl-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
+  .pred-tbl-wrap table thead th { background: var(--surface); }
+  .prob-cell { min-width: 130px; }
+  .bar-wrap { display: flex; align-items: center; gap: 8px; }
+  .bar-bg { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; transition: width .6s cubic-bezier(.4,0,.2,1); }
+  .bar-val { font-family: 'DM Mono', monospace; font-size: 11px; width: 34px; text-align: right; flex-shrink: 0; }
+  .bar-title .bar-fill { background: var(--gold); }
+  .bar-playoff .bar-fill { background: var(--playoff); }
+  .bar-relegate .bar-fill { background: var(--relegate); }
+  .bar-title .bar-val { color: var(--gold); }
+  .bar-playoff .bar-val { color: var(--playoff); }
+  .bar-relegate .bar-val { color: var(--relegate); }
+
+  .delta-up   { color: var(--promo);    font-size: 11px; }
+  .delta-down { color: var(--relegate); font-size: 11px; }
+  .delta-same { color: var(--muted);    font-size: 11px; }
+
+  /* ── INFO PANEL ── */
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+  .info-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: .04em; margin-bottom: 12px; color: var(--accent); }
+  .info-card p, .info-card li { color: var(--sub); line-height: 1.7; font-size: 13px; }
+  .info-card ul { padding-left: 16px; }
+  .info-card li { margin-bottom: 4px; }
+  code { font-family: 'DM Mono', monospace; font-size: 12px; background: var(--border); padding: 2px 5px; border-radius: 3px; color: var(--accent); }
+
+  .json-block {
+    background: #0d0f15; border: 1px solid var(--border); border-radius: 8px;
+    padding: 16px; font-family: 'DM Mono', monospace; font-size: 12px; color: #7a80a0;
+    overflow-x: auto; line-height: 1.6; margin-top: 12px;
+  }
+  .json-block .key  { color: var(--playoff); }
+  .json-block .str  { color: var(--promo); }
+  .json-block .num  { color: var(--gold); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    header, main { padding-left: 20px; padding-right: 20px; }
+    .tabs-wrap { padding: 0 20px; }
+    .tab { padding: 12px 12px; font-size: 11px; }
+    .hide-sm { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div>
+      <div class="badge">Live Season Data</div>
+      <h1>Women's Super<br>League <span>2</span></h1>
+      <p class="meta" id="meta-line">Season 2025/26 · Updated —</p>
+    </div>
+    <div class="games-left">
+      <div class="num" id="games-remaining">—</div>
+      <div class="lbl">Games Remaining</div>
+    </div>
+  </div>
+</header>
+
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('standings',this)">Standings</button>
+    <button class="tab" onclick="switchTab('predictions',this)">Predictions</button>
+    <button class="tab" onclick="switchTab('info',this)">Data Format</button>
+  </div>
+</div>
+
+<main>
+
+  <!-- STANDINGS -->
+  <div id="panel-standings" class="panel active">
+    <div class="legend">
+      <div class="leg"><div class="dot" style="background:var(--promo)"></div> Champions / Promotion</div>
+      <div class="leg"><div class="dot" style="background:var(--playoff)"></div> Promotion Playoff</div>
+      <div class="leg"><div class="dot" style="background:var(--relegate)"></div> Relegation Zone</div>
+    </div>
+    <div class="tbl-wrap">
+      <table id="standings-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Team</th>
+            <th class="hide-sm">P</th>
+            <th class="hide-sm">W</th>
+            <th class="hide-sm">D</th>
+            <th class="hide-sm">L</th>
+            <th class="hide-sm">GF</th>
+            <th class="hide-sm">GA</th>
+            <th>GD</th>
+            <th>Pts</th>
+            <th>Form</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PREDICTIONS -->
+  <div id="panel-predictions" class="panel">
+    <div class="spotlight" id="spotlight-cards"></div>
+    <div class="pred-tbl-wrap">
+      <table id="pred-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Team</th>
+            <th>Curr Pts</th>
+            <th>Pred Pts</th>
+            <th class="prob-cell">Title %</th>
+            <th class="prob-cell">Playoff %</th>
+            <th class="prob-cell">Relegation %</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- INFO -->
+  <div id="panel-info" class="panel">
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>How It Works</h3>
+        <p>This site reads a single <code>data.json</code> file hosted alongside it. To update predictions, simply edit the JSON and redeploy. No server or database required.</p>
+        <p style="margin-top:10px;">Hosting options (all free):</p>
+        <ul>
+          <li>GitHub Pages — push to <code>gh-pages</code> branch</li>
+          <li>Netlify / Vercel — drag-and-drop deploy</li>
+          <li>Any static file host</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>JSON Schema</h3>
+        <p>Required top-level fields:</p>
+        <div class="json-block">
+<span class="key">"season"</span>: <span class="str">"2025/26"</span>,<br>
+<span class="key">"lastUpdated"</span>: <span class="str">"2026-03-31T12:00:00"</span>,<br>
+<span class="key">"gamesRemaining"</span>: <span class="num">2</span>,<br>
+<span class="key">"standings"</span>: [ … ],<br>
+<span class="key">"predictions"</span>: [ … ]
+        </div>
+      </div>
+      <div class="info-card">
+        <h3>Standings Entry</h3>
+        <div class="json-block">
+{<br>
+&nbsp;&nbsp;<span class="key">"rank"</span>: <span class="num">1</span>,<br>
+&nbsp;&nbsp;<span class="key">"team"</span>: <span class="str">"Team Name"</span>,<br>
+&nbsp;&nbsp;<span class="key">"played"</span>: <span class="num">20</span>,<br>
+&nbsp;&nbsp;<span class="key">"won"</span>: <span class="num">12</span>, <span class="key">"drawn"</span>: <span class="num">5</span>, <span class="key">"lost"</span>: <span class="num">3</span>,<br>
+&nbsp;&nbsp;<span class="key">"gf"</span>: <span class="num">29</span>, <span class="key">"ga"</span>: <span class="num">17</span>, <span class="key">"gd"</span>: <span class="num">12</span>,<br>
+&nbsp;&nbsp;<span class="key">"points"</span>: <span class="num">41</span>,<br>
+&nbsp;&nbsp;<span class="key">"form"</span>: [<span class="str">"W"</span>,<span class="str">"W"</span>,<span class="str">"D"</span>,<span class="str">"W"</span>,<span class="str">"W"</span>]<br>
+}
+        </div>
+      </div>
+      <div class="info-card">
+        <h3>Predictions Entry</h3>
+        <div class="json-block">
+{<br>
+&nbsp;&nbsp;<span class="key">"predictedRank"</span>: <span class="num">1</span>,<br>
+&nbsp;&nbsp;<span class="key">"team"</span>: <span class="str">"Team Name"</span>,<br>
+&nbsp;&nbsp;<span class="key">"predictedPoints"</span>: <span class="num">50</span>,<br>
+&nbsp;&nbsp;<span class="key">"titleProb"</span>: <span class="num">72</span>,<br>
+&nbsp;&nbsp;<span class="key">"playoffProb"</span>: <span class="num">22</span>,<br>
+&nbsp;&nbsp;<span class="key">"relegationProb"</span>: <span class="num">0</span><br>
+}
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ── Embedded fallback data (from your data.json) ──────────────────────────
+const FALLBACK = {"lastUpdated":"2026-03-31T12:00:00","season":"2025/26","gamesRemaining":2,"standings":[{"rank":1,"team":"Charlton Athletic","played":20,"won":12,"drawn":5,"lost":3,"gf":29,"ga":17,"gd":12,"points":41,"form":["W","W","D","W","W"]},{"rank":2,"team":"Birmingham City","played":19,"won":12,"drawn":2,"lost":5,"gf":43,"ga":21,"gd":22,"points":38,"form":["W","W","W","D","L"]},{"rank":3,"team":"Crystal Palace","played":19,"won":10,"drawn":5,"lost":4,"gf":35,"ga":24,"gd":11,"points":35,"form":["W","D","W","L","W"]},{"rank":4,"team":"Newcastle United","played":19,"won":8,"drawn":8,"lost":3,"gf":30,"ga":21,"gd":9,"points":32,"form":["D","W","D","W","L"]},{"rank":5,"team":"Bristol City","played":19,"won":9,"drawn":3,"lost":7,"gf":39,"ga":28,"gd":11,"points":30,"form":["W","L","W","W","D"]},{"rank":6,"team":"Southampton","played":19,"won":8,"drawn":4,"lost":7,"gf":34,"ga":22,"gd":12,"points":28,"form":["W","L","D","W","L"]},{"rank":7,"team":"Nottingham Forest","played":19,"won":8,"drawn":2,"lost":9,"gf":25,"ga":31,"gd":-6,"points":26,"form":["L","W","L","D","L"]},{"rank":8,"team":"Sunderland","played":19,"won":6,"drawn":6,"lost":7,"gf":26,"ga":30,"gd":-4,"points":24,"form":["D","L","W","L","D"]},{"rank":9,"team":"Sheffield United","played":18,"won":4,"drawn":6,"lost":8,"gf":17,"ga":28,"gd":-11,"points":18,"form":["D","L","D","W","L"]},{"rank":10,"team":"Durham","played":19,"won":3,"drawn":6,"lost":10,"gf":22,"ga":32,"gd":-10,"points":15,"form":["L","D","L","W","L"]},{"rank":11,"team":"Ipswich Town","played":18,"won":3,"drawn":5,"lost":10,"gf":17,"ga":39,"gd":-22,"points":14,"form":["L","L","D","L","W"]},{"rank":12,"team":"Portsmouth","played":20,"won":4,"drawn":2,"lost":14,"gf":22,"ga":46,"gd":-24,"points":14,"form":["L","L","W","L","L"]}],"predictions":[{"predictedRank":1,"team":"Charlton Athletic","predictedPoints":50,"titleProb":72,"playoffProb":22,"relegationProb":0},{"predictedRank":2,"team":"Birmingham City","predictedPoints":41,"titleProb":18,"playoffProb":35,"relegationProb":0},{"predictedRank":3,"team":"Crystal Palace","predictedPoints":38,"titleProb":8,"playoffProb":44,"relegationProb":1},{"predictedRank":4,"team":"Bristol City","predictedPoints":34,"titleProb":2,"playoffProb":28,"relegationProb":2},{"predictedRank":5,"team":"Newcastle United","predictedPoints":33,"titleProb":0,"playoffProb":18,"relegationProb":3},{"predictedRank":6,"team":"Southampton","predictedPoints":29,"titleProb":0,"playoffProb":8,"relegationProb":8},{"predictedRank":7,"team":"Nottingham Forest","predictedPoints":25,"titleProb":0,"playoffProb":3,"relegationProb":15},{"predictedRank":8,"team":"Sunderland","predictedPoints":23,"titleProb":0,"playoffProb":2,"relegationProb":22},{"predictedRank":9,"team":"Sheffield United","predictedPoints":19,"titleProb":0,"playoffProb":0,"relegationProb":41},{"predictedRank":10,"team":"Durham","predictedPoints":18,"titleProb":0,"playoffProb":0,"relegationProb":47},{"predictedRank":11,"team":"Ipswich Town","predictedPoints":17,"titleProb":0,"playoffProb":0,"relegationProb":68},{"predictedRank":12,"team":"Portsmouth","predictedPoints":16,"titleProb":0,"playoffProb":0,"relegationProb":81}]};
+
+// ── Helpers ───────────────────────────────────────────────────────────────
+function fmtDate(iso) {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  return d.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' })
+       + ' · ' + d.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
+}
+
+function zoneClass(rank) {
+  if (rank === 1) return 'zone-promo';
+  if (rank === 2 || rank === 3) return 'zone-playoff';
+  if (rank >= 11) return 'zone-relegate';
+  return '';
+}
+
+function bar(val, type) {
+  const pct = Math.min(100, val);
+  return `<div class="bar-wrap bar-${type}">
+    <div class="bar-bg"><div class="bar-fill" style="width:${pct}%"></div></div>
+    <span class="bar-val">${val}%</span>
+  </div>`;
+}
+
+// ── Render ────────────────────────────────────────────────────────────────
+function render(data) {
+  // Header meta
+  document.getElementById('meta-line').textContent =
+    `Season ${data.season} · Updated ${fmtDate(data.lastUpdated)}`;
+  document.getElementById('games-remaining').textContent = data.gamesRemaining;
+
+  // Build a points lookup for predictions table
+  const ptsMap = {};
+  data.standings.forEach(t => ptsMap[t.team] = t.points);
+
+  // ── Standings ────────────────────────────────────────────────────────
+  const sTbody = document.querySelector('#standings-table tbody');
+  sTbody.innerHTML = data.standings.map(t => {
+    const gdStr = t.gd > 0 ? `+${t.gd}` : `${t.gd}`;
+    const gdClass = t.gd > 0 ? 'gd-pos' : t.gd < 0 ? 'gd-neg' : '';
+    const formHtml = t.form.map(r => `<span class="${r}">${r}</span>`).join('');
+    return `<tr class="${zoneClass(t.rank)}">
+      <td class="rank">${t.rank}</td>
+      <td class="team-name">${t.team}</td>
+      <td class="num-cell hide-sm">${t.played}</td>
+      <td class="num-cell hide-sm">${t.won}</td>
+      <td class="num-cell hide-sm">${t.drawn}</td>
+      <td class="num-cell hide-sm">${t.lost}</td>
+      <td class="num-cell hide-sm">${t.gf}</td>
+      <td class="num-cell hide-sm">${t.ga}</td>
+      <td class="num-cell ${gdClass}">${gdStr}</td>
+      <td class="pts">${t.points}</td>
+      <td><div class="form">${formHtml}</div></td>
+    </tr>`;
+  }).join('');
+
+  // ── Spotlight cards ──────────────────────────────────────────────────
+  const titleFav   = data.predictions.reduce((a,b) => b.titleProb > a.titleProb ? b : a);
+  const playoffFav = data.predictions.reduce((a,b) => b.playoffProb > a.playoffProb ? b : a);
+  const relegDanger = data.predictions.reduce((a,b) => b.relegationProb > a.relegationProb ? b : a);
+
+  document.getElementById('spotlight-cards').innerHTML = `
+    <div class="spot-card title">
+      <div class="spot-label">Most likely champions</div>
+      <div class="spot-team">${titleFav.team}</div>
+      <div class="spot-prob">${titleFav.titleProb}%</div>
+      <div class="spot-pts">Predicted ${titleFav.predictedPoints} pts</div>
+    </div>
+    <div class="spot-card playoff">
+      <div class="spot-label">Playoff contender</div>
+      <div class="spot-team">${playoffFav.team}</div>
+      <div class="spot-prob">${playoffFav.playoffProb}%</div>
+      <div class="spot-pts">Predicted ${playoffFav.predictedPoints} pts</div>
+    </div>
+    <div class="spot-card danger">
+      <div class="spot-label">Top relegation risk</div>
+      <div class="spot-team">${relegDanger.team}</div>
+      <div class="spot-prob">${relegDanger.relegationProb}%</div>
+      <div class="spot-pts">Predicted ${relegDanger.predictedPoints} pts</div>
+    </div>`;
+
+  // ── Predictions table ────────────────────────────────────────────────
+  const pTbody = document.querySelector('#pred-table tbody');
+  pTbody.innerHTML = data.predictions.map(t => {
+    const currPts = ptsMap[t.team] ?? '—';
+    const rankDiff = (data.standings.find(s => s.team === t.team)?.rank ?? t.predictedRank) - t.predictedRank;
+    let deltaHtml = '';
+    if (rankDiff > 0)       deltaHtml = `<span class="delta-up">▲${rankDiff}</span>`;
+    else if (rankDiff < 0)  deltaHtml = `<span class="delta-down">▼${Math.abs(rankDiff)}</span>`;
+    else                    deltaHtml = `<span class="delta-same">—</span>`;
+
+    return `<tr class="${zoneClass(t.predictedRank)}">
+      <td class="rank">${t.predictedRank} ${deltaHtml}</td>
+      <td class="team-name">${t.team}</td>
+      <td class="num-cell">${currPts}</td>
+      <td class="pts">${t.predictedPoints}</td>
+      <td class="prob-cell">${bar(t.titleProb,'title')}</td>
+      <td class="prob-cell">${bar(t.playoffProb,'playoff')}</td>
+      <td class="prob-cell">${bar(t.relegationProb,'relegate')}</td>
+    </tr>`;
+  }).join('');
+
+  // Animate bars after paint
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.bar-fill').forEach(el => {
+      const w = el.style.width;
+      el.style.width = '0';
+      requestAnimationFrame(() => { el.style.width = w; });
+    });
+  });
+}
+
+// ── Tab switching ─────────────────────────────────────────────────────────
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── Boot ──────────────────────────────────────────────────────────────────
+(async function init() {
+  let data = FALLBACK;
+  try {
+    const res = await fetch('data.json');
+    if (res.ok) data = await res.json();
+  } catch (_) { /* use fallback */ }
+  render(data);
+})();
+</script>
+</body>
+</html>
