@@ -253,7 +253,7 @@ function fmtDate(iso) {
 function zoneClass(rank) {
   if (rank <= 2)  return 'zone-promo';
   if (rank === 3) return 'zone-playoff';
-  if (rank >= 11) return 'zone-relegate';
+  if (rank == 12) return 'zone-relegate';
   return '';
 }
 
