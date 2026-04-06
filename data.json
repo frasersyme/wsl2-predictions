@@ -16,17 +16,17 @@
     { "rank": 12, "team": "Portsmouth",         "played": 20, "won": 4,  "drawn": 2, "lost": 14, "gf": 22, "ga": 46, "gd":-24, "points": 14, "form": ["L","W","D","L","L"] }
   ],
   "predictions": [
-    { "predictedRank": 1,  "team": "Birmingham City",    "predictedPoints": 44.6, "titleProb": 73.4, "playoffProb": 3.5, "relegationProb": 0  },
-    { "predictedRank": 2,  "team": "Charlton Athletic",  "predictedPoints": 43.4, "titleProb": 25.8, "playoffProb": 14.1, "relegationProb": 0  },
-    { "predictedRank": 3,  "team": "Crystal Palace",     "predictedPoints": 41.3, "titleProb": 0.8,  "playoffProb": 80.6, "relegationProb": 0  },
-    { "predictedRank": 4,  "team": "Newcastle United",   "predictedPoints": 36.1, "titleProb": 0,  "playoffProb": 1.8, "relegationProb": 0  },
-    { "predictedRank": 5,  "team": "Bristol City",       "predictedPoints": 34.0, "titleProb": 0,  "playoffProb": 0, "relegationProb": 0  },
-    { "predictedRank": 6,  "team": "Southampton",        "predictedPoints": 33.9, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 0  },
-    { "predictedRank": 7,  "team": "Nottingham Forest",  "predictedPoints": 30.0, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 0 },
-    { "predictedRank": 8,  "team": "Sunderland",         "predictedPoints": 26.8, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 0 },
-    { "predictedRank": 9,  "team": "Sheffield United",   "predictedPoints": 21.8, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 0.1 },
-    { "predictedRank": 10, "team": "Durham",             "predictedPoints": 17.4, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 16.2 },
-    { "predictedRank": 11, "team": "Ipswich Town",       "predictedPoints": 17.4, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 28.5 },
-    { "predictedRank": 12, "team": "Portsmouth",         "predictedPoints": 16.1, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 55.2 }
+    { "predictedRank": 1,  "team": "Birmingham City",    "predictedPoints": 44.48, "titleProb": 69.86, "playoffProb": 5.25, "relegationProb": 0  },
+    { "predictedRank": 2,  "team": "Charlton Athletic",  "predictedPoints": 43.42, "titleProb": 28.68, "playoffProb": 13.54, "relegationProb": 0  },
+    { "predictedRank": 3,  "team": "Crystal Palace",     "predictedPoints": 41.25, "titleProb": 1.46,  "playoffProb": 79.90, "relegationProb": 0  },
+    { "predictedRank": 4,  "team": "Newcastle United",   "predictedPoints": 35.99, "titleProb": 0,  "playoffProb": 1.31, "relegationProb": 0  },
+    { "predictedRank": 5,  "team": "Bristol City",       "predictedPoints": 33.96, "titleProb": 0,  "playoffProb": 0, "relegationProb": 0  },
+    { "predictedRank": 6,  "team": "Southampton",        "predictedPoints": 33.85, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 0  },
+    { "predictedRank": 7,  "team": "Nottingham Forest",  "predictedPoints": 29.98, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 0 },
+    { "predictedRank": 8,  "team": "Sunderland",         "predictedPoints": 26.80, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 0 },
+    { "predictedRank": 9,  "team": "Sheffield United",   "predictedPoints": 21.73, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 0.15 },
+    { "predictedRank": 10, "team": "Ipswich Town",       "predictedPoints": 17.63, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 28.78 },
+    { "predictedRank": 11, "team": "Durham",             "predictedPoints": 17.51, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 15.94 },
+    { "predictedRank": 12, "team": "Portsmouth",         "predictedPoints": 16.13, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 55.13 }
   ]
 }
