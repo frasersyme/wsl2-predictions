@@ -23,10 +23,10 @@
     { "predictedRank": 5,  "team": "Sunderland",   "predictedPoints": 35.21, "titleProb": 5.07,  "playoffProb": 0, "relegationProb": 0  },
     { "predictedRank": 6,  "team": "Leicester City",        "predictedPoints": 33.22, "titleProb": 3.80,  "playoffProb": 0,  "relegationProb": 0  },
     { "predictedRank": 7,  "team": "Ipswich Town",  "predictedPoints": 31.52, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 0 },
-    { "predictedRank": 8,  "team": "Sheffield United",         "predictedPoints": 25.20, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 10 },
-    { "predictedRank": 9, "team": "Wolverhampton Wanderers",       "predictedPoints": 21.54, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 20 },
-    { "predictedRank": 10, "team": "Watford",             "predictedPoints": 19.58, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 50 },
-    { "predictedRank": 11,  "team": "Durham",   "predictedPoints": 19.34, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 60 },
-    { "predictedRank": 12, "team": "Burnley",         "predictedPoints": 14.38, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 60 }
+    { "predictedRank": 8,  "team": "Sheffield United",         "predictedPoints": 25.20, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 10.05 },
+    { "predictedRank": 9, "team": "Wolverhampton Wanderers",       "predictedPoints": 21.54, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 18.95 },
+    { "predictedRank": 10, "team": "Watford",             "predictedPoints": 19.58, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 51.06 },
+    { "predictedRank": 11,  "team": "Durham",   "predictedPoints": 19.34, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 59.84 },
+    { "predictedRank": 12, "team": "Burnley",         "predictedPoints": 14.38, "titleProb": 0,  "playoffProb": 0,  "relegationProb": 60.90 }
   ]
 }
