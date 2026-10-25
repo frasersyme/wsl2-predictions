@@ -1,19 +1,19 @@
 {
-  "lastUpdated": "2026-04-28T00:01:00",
-  "season": "2025/26",
+  "lastUpdated": "2026-10-25T22:01:00",
+  "season": "2026/27",
   "standings": [
-    { "rank": 1,  "team": "Newcastle United",        "played": 5, "won": 5, "drawn": 0, "lost": 0, "gf": 14, "ga": 1,  "gd": 13,  "xG": 1.79, "xGA": 0.95, "points": 15, "form": ["W","W","W","W","W"] },
-    { "rank": 2,  "team": "Sunderland",              "played": 5, "won": 4, "drawn": 1, "lost": 0, "gf": 11, "ga": 4,  "gd": 7,   "xG": 1.61, "xGA": 1.23, "points": 13, "form": ["W","W","D","W","W"] },
-    { "rank": 3,  "team": "Ipswich Town",            "played": 5, "won": 3, "drawn": 2, "lost": 0, "gf": 7,  "ga": 3,  "gd": 4,   "xG": 1.22, "xGA": 1.62, "points": 11, "form": ["D","D","W","W","W"] },
-    { "rank": 4,  "team": "Nottingham Forest",       "played": 5, "won": 2, "drawn": 3, "lost": 0, "gf": 8,  "ga": 5,  "gd": 3,   "xG": 0.76, "xGA": 0.65, "points": 9,  "form": ["D","D","W","D","W"] },
-    { "rank": 5,  "team": "Wolverhampton Wanderers", "played": 5, "won": 2, "drawn": 1, "lost": 2, "gf": 9,  "ga": 8,  "gd": 1,   "xG": 1.48, "xGA": 1.42, "points": 7,  "form": ["L","W","W","L","D"] },
-    { "rank": 6,  "team": "Bristol City",            "played": 5, "won": 2, "drawn": 1, "lost": 2, "gf": 8,  "ga": 7,  "gd": 1,   "xG": 1.65, "xGA": 1.45, "points": 7,  "form": ["L","L","W","D","W"] },
-    { "rank": 7,  "team": "Southampton",             "played": 5, "won": 1, "drawn": 3, "lost": 1, "gf": 5,  "ga": 4,  "gd": 1,   "xG": 2.02, "xGA": 1.10, "points": 6,  "form": ["W","D","D","D","L"] },
-    { "rank": 8,  "team": "Leicester City",          "played": 5, "won": 2, "drawn": 0, "lost": 3, "gf": 6,  "ga": 10, "gd": -4,  "xG": 1.36, "xGA": 1.80, "points": 6,  "form": ["W","W","L","L","L"] },
-    { "rank": 9,  "team": "Sheffield United",        "played": 5, "won": 1, "drawn": 0, "lost": 4, "gf": 7,  "ga": 11, "gd": -4,  "xG": 1.61, "xGA": 1.89, "points": 3,  "form": ["L","L","L","W","L"] },
-    { "rank": 10, "team": "Watford",                 "played": 5, "won": 0, "drawn": 3, "lost": 2, "gf": 6,  "ga": 11, "gd": -5,  "xG": 0.87, "xGA": 1.85, "points": 3,  "form": ["D","D","L","L","D"] },
-    { "rank": 11, "team": "Burnley",                 "played": 5, "won": 0, "drawn": 2, "lost": 3, "gf": 1,  "ga": 7,  "gd": -6,  "xG": 1.32, "xGA": 1.74, "points": 2,  "form": ["D","D","L","L","L"] },
-    { "rank": 12, "team": "Durham",                  "played": 5, "won": 0, "drawn": 0, "lost": 5, "gf": 5,  "ga": 16, "gd": -11, "xG": 1.20, "xGA": 2.34, "points": 0,  "form": ["L","L","L","L","L"] }
+    { "rank": 1,  "team": "Newcastle United",        "played": 6, "won": 5, "drawn": 1, "lost": 0, "gf": 16, "ga": 3,  "gd": 13,  "xG": 1.81, "xGA": 0.96, "points": 16, "form": ["W","W","W","W","D"] },
+    { "rank": 2,  "team": "Ipswich Town",            "played": 6, "won": 4, "drawn": 2, "lost": 0, "gf": 10,  "ga": 4,  "gd": 6,   "xG": 1.30, "xGA": 1.64, "points": 14, "form": ["D","W","W","W","W"] },
+    { "rank": 3,  "team": "Sunderland",              "played": 6, "won": 4, "drawn": 1, "lost": 1, "gf": 12, "ga": 7,  "gd": 5,   "xG": 1.64, "xGA": 1.33, "points": 13, "form": ["W","D","W","W","L"] },    
+    { "rank": 4,  "team": "Bristol City",            "played": 6, "won": 3, "drawn": 1, "lost": 2, "gf": 12,  "ga": 9,  "gd": 3,   "xG": 1.67, "xGA": 1.34, "points": 10,  "form": ["L","W","D","W","W"] },
+    { "rank": 5,  "team": "Nottingham Forest",       "played": 6, "won": 2, "drawn": 4, "lost": 0, "gf": 10,  "ga": 7,  "gd": 3,   "xG": 1.17, "xGA": 1.40, "points": 10,  "form": ["D","W","D","W","D"] },
+    { "rank": 6,  "team": "Southampton",             "played": 6, "won": 1, "drawn": 4, "lost": 1, "gf": 7,  "ga": 6,  "gd": 1,   "xG": 2.07, "xGA": 1.11, "points": 7,  "form": ["D","D","D","L","D"] },
+    { "rank": 7,  "team": "Wolverhampton Wanderers", "played": 6, "won": 2, "drawn": 1, "lost": 3, "gf": 11,  "ga": 12,  "gd": -1,   "xG": 1.31, "xGA": 1.51, "points": 7,  "form": ["W","W","L","D","L"] }, 
+    { "rank": 8,  "team": "Leicester City",          "played": 6, "won": 2, "drawn": 1, "lost": 3, "gf": 8,  "ga": 12, "gd": -4,  "xG": 1.32, "xGA": 1.93, "points": 7,  "form": ["W","L","L","L","D"] },
+    { "rank": 9,  "team": "Sheffield United",        "played": 6, "won": 2, "drawn": 0, "lost": 4, "gf": 11,  "ga": 14, "gd": -3,  "xG": 1.71, "xGA": 2.00, "points": 6,  "form": ["L","L","W","L","W"] },
+    { "rank": 10, "team": "Watford",                 "played": 6, "won": 1, "drawn": 3, "lost": 2, "gf": 10,  "ga": 13, "gd": -3,  "xG": 1.02, "xGA": 1.76, "points": 6,  "form": ["D","L","L","D","W"] },
+    { "rank": 11, "team": "Burnley",                 "played": 6, "won": 0, "drawn": 2, "lost": 4, "gf": 4,  "ga": 11,  "gd": -7,  "xG": 1.58, "xGA": 1.80, "points": 2,  "form": ["L","L","D","L","L"] },
+    { "rank": 12, "team": "Durham",                  "played": 6, "won": 0, "drawn": 0, "lost": 6, "gf": 7,  "ga": 20, "gd": -13, "xG": 1.27, "xGA": 2.12, "points": 0,  "form": ["L","L","L","L","L"] }
   ],
   "predictions": [
     { "predictedRank": 1,  "team": "Newcastle United",     "predictedPoints": 43.48, "titleProb": 40.75,  "playoffProb": 26.40, "relegationProb": 0  },
